@@ -1,0 +1,22 @@
+.inputBox > span{
+    font-family: "Roboto";
+    animation: sliding 14s linear infinite;
+    display: block;
+}
+
+.Header{
+    z-index: 9999999999999;
+}
+
+.header-logo{
+    width: 150px;
+    height: 30px;
+}
+@keyframes sliding{
+    0%{
+      transform: translateX(-70%);
+    }
+    100%{
+      transform: translateX(130%);
+    }
+  }
