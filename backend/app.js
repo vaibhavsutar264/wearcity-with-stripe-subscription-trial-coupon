@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const dotenv = require("dotenv");
+// const dotenv = require("dotenv");
 
 const cookieParser = require("cookie-parser");
 //now for uploading a file we require body parser and file uploader
@@ -11,7 +11,9 @@ const fileUpload = require("express-fileupload");
 const errorMiddleware = require("./middleware/error");
 const path = require("path")
 
-dotenv.config({path:"backend/config/config.env"});
+if(process.env.NODE_ENV !== "PRODUCTION" ){
+    require("dotenv").config({path:"backend/config/config.env"});
+} //this is used for process.env path location which is stated below
 
 
 
