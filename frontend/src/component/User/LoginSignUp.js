@@ -33,6 +33,7 @@ const LoginSignUp = ({ history, location }) => {
   const { name, email, password } = user;
 
   const [avatar, setAvatar] = useState("/logo192.png");
+
   const [avatarPreview, setAvatarPreview] = useState("/logo192.png");
 
   const loginSubmit = (e) => {
@@ -60,8 +61,7 @@ const LoginSignUp = ({ history, location }) => {
 
       reader.onload = () => {
         if (reader.readyState === 2) {
-
-            // here 2 is for done condition 0 isfor initial and 1 is for processing condition
+            // here 2 is for done condition 0 is for initial and 1 is for processing condition 
           setAvatarPreview(reader.result);
           setAvatar(reader.result);
         }
@@ -69,6 +69,7 @@ const LoginSignUp = ({ history, location }) => {
       reader.readAsDataURL(e.target.files[0]);
     } else {
       setUser({ ...user, [e.target.name]: e.target.value });
+      //here you take e.target.name is the value of name from input tag input tag has attribute as name 
     //   for eg {...user, name: abhishek}
     //   for eg {...user, email: abhishek}
     //   for eg {...user, password: abhishek}
@@ -164,6 +165,7 @@ const LoginSignUp = ({ history, location }) => {
                     placeholder="Name"
                     required
                     name="name"
+                    //here name is exist because form dat to be created 
                     value={name}
                     onChange={ registerDataChange }
                   />

@@ -71,7 +71,7 @@ class ApiFeatures {
         const currentPage = Number(this.queryStr.page) || 1;
 
         //now if u wants to go on 2nd page then u have to skip 1st page if u wants to go on 4th page then u have to skip the 1st 2 pages that is 1st and 2nd page
-
+        
         const skip = resultPerPage*(currentPage-1);
         //for example u have 10 products per page then if u wants to go on 3rd page then previous 2 pages products which is 20 products should not shown to u so for that skip = 10*(3-1)=20 so in this way previous 20 products will not be shown
         

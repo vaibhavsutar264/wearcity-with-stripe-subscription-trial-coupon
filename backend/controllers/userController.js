@@ -59,12 +59,16 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
 
     //now we will findout previous user and previous userpassword in below for selecting the password we used select method because in the usermodel password is given as select false so we cannot select it directly so we have selected it by select method
 
-    const user = await User.findOne({ email }).select("+password"); //always use await function when u specify aync in fuction defining
+    const user = await User.findOne({ email }).select("+password"); 
+    //select method is used for password because password is set as false at the usermodel
+    //always use await function when u specify aync in fuction defining
 
     if (!user) {
         return next(new ErrorHander("indvalid email or password", 401));
         //here 401 is a satuscode for unauthorize request
     }
+
+    //ata jar email asen tr mg jo password ahe tyala compare kara
 
     const isPasswordMatched = await user.comparePassword(password); //this compare password function is given in usermodel ... this compare password is used to compare the given password in input tag is same as user given password when he was registered so in capare password the parameter given as password is the password given by person while logging details putting from this we will check this password is really the password which we saved in the databases
 
@@ -78,16 +82,21 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     //     success: true,
     //     token
     // });
-    sendToken(user, 200, res); //here this function is called to collect the login token and save it in cookies
+    sendToken(user, 200, res); 
+    //here 3 parameter is also passed while calling because overe jwttoken.js file while declaring this function there are 3 arguments passed in 1st line which are user statuscode and res
+     //here this function is called to collect the login token and save it in cookies
 });
 
 // Logout user
 
 exports.logout = catchAsyncErrors(async (req, res, next) => {
+    //logout krne khup simple ahe fakt logout vr click kelyavr cookie madlya token la expire karaycha sampla vishay
     res.cookie("token", null, {
         expires: new Date(Date.now()),
         httpOnly: true,
     });
+
+    //cookie kadi hi 3 parameter ghete 1st cookie madla aslyala keyword mg tya keyword cha value ani mg tya keyword chi expirytr yat cookie cha keyword chi value logout vr click kelyavr null keli ahe apan
 
     res.status(200).json({
         success: true,

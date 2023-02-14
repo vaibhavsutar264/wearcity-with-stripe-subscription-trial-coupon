@@ -209,7 +209,6 @@ const ProductDetails = ({ match }) => {
                         <div className="reviews">
                             {product.reviews &&
                                 product.reviews.map((review) => <ReviewCard review={review} />)}
-
                         </div>
                     ) : (<p className="noReviews"> no reviews yet</p>)}
                 </Fragment>)}

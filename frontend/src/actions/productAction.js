@@ -12,7 +12,8 @@ import { ALL_PRODUCT_FAIL,ALL_PRODUCT_REQUEST,ALL_PRODUCT_SUCCESS, PRODUCT_DETAI
     DELETE_REVIEW_RESET, CLEAR_ERRORS } from "../constants/productConstants";
 
 export const getProduct = (keyword="",currentPage=1,price=[0,25000], category,ratings=0) => async (dispatch)=>{
-    //above keyword argument is passed for searching the products and toreceiving the data from backend such as price
+    //here dispatch means recieve all data from backend and dispatch those in frontend
+    //above keyword argument is passed for searching the products and to receiving the data from backend such as price
     try {
        //this function is used to collect data from backend so in order to collect data from backend through redux method use dispatch function for proper request and success and error functioning by product reducers 
         dispatch({ type: ALL_PRODUCT_REQUEST });

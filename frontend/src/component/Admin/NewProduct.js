@@ -122,7 +122,6 @@ const NewProduct = ({ history }) => {
 
             <div>
               <DescriptionIcon />
-
               <textarea
                 placeholder="Product Description"
                 value={description}
@@ -131,7 +130,6 @@ const NewProduct = ({ history }) => {
                 rows="1"
               ></textarea>
             </div>
-
             <div>
               <AccountTreeIcon />
               <select onChange={(e) => setCategory(e.target.value)}>

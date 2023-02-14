@@ -52,6 +52,7 @@ export const login = (email, password) => async (dispatch) => {
         const { data } = await axios.post(
             `/api/v1/login`,
             { email, password },
+            //initial value is set as the value which we put in input tag
             config
         )
         dispatch({ type: LOGIN_SUCCESS, payload: data.user });

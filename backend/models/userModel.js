@@ -51,11 +51,12 @@ const userSchema = new mongoose.Schema({
 
 //this below function is used for hashing the password which is saved in databases
 userSchema.pre("save", async function(next){
+    // here function keyword is used and arrow is not used because we needed userschema password and by arrow function it was not accessible therefore function is used so that we can access that with this keyword
     // now if this.password is not changed then below condition will apply
 
     if(!this.isModified("password")){
         next();
-        //means do nothing move forward 
+        //means password is not set and directly cliced on submit button then do nothing or on update user details if we change only email then do not hash again the same password ismodified keyword is used forthis functioning
     }
 
     this.password = await bcrypt.hash(this.password,10);
@@ -68,6 +69,8 @@ userSchema.pre("save", async function(next){
 //now crete a token by using the methods function
 userSchema.methods.getJWTToken = function(){
     return jwt.sign({ id: this._id}, process.env.JWT_SECRET, {
+        //sign is a method to create a logged in user jswttoken, its parameters are 1st is for which user u need to create the token for this it will take the isd of that user from userschema and mongodb created _id in database for each user even if u dont initialise it in usermodel and then it takes second parameter as jwt secret and 3rd parameter as options such as expiresin 
+        // jwtsecret is the user defined key u can write anythig as a key but write lots of words example : sdncbjhdvcjhsdckjsdkdbcjhsdcbsdcbsdhcbsdhcbsdjhcbsd and JWT_EXPIRE can set by user only as 5d where 5d means 5days
         expiresIn: process.env.JWT_EXPIRE,
     })
 }
@@ -76,6 +79,7 @@ userSchema.methods.getJWTToken = function(){
 
 userSchema.methods.comparePassword = async function(enteredPassword){
     return await bcrypt.compare(enteredPassword,this.password); 
+    // bcrypt has a compare method for checking the password with entered password
     // here we have used bcrypt because the password which is saved in databases is in hash type so by using compare it will compare the actual password with the enteredpassword
     // by using this keyword u were saying thattake password from userschema only
 

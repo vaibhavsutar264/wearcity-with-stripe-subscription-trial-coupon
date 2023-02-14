@@ -12,18 +12,23 @@ const cloudinary = require("cloudinary");
 
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
+    // ===================== ONE IMAGE CONDITION ===================
+
     let images = [];
 
     if (typeof req.body.images === "string") {
-        // it means the image has only one image as it is a string ecause lots of images have type of as array
+        // it means the image has only one image as it is a string because lots of images have type of as array
         images.push(req.body.images);
         //by images push image upload on cloudinary
     } else {
         images = req.body.images;
+        //this is for lots of images condition
     }
     //now there is imageslink also 
 
     // we will apply a for loop fro each image link
+
+    // ========= UPLOAD THE IMAGE TO CLOUDINARY CONDITION ==========
 
     const imagesLink = [];
     for (let i = 0; i < images.length; i++) {
@@ -34,14 +39,14 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
         imagesLink.push({
             //by this images link created and upload on cloudinary
-            public_id: result.public_id,
+            public_id: result.public_id, //result.publicid is getting from cloudinary bacause we have linked it with process.env.cloudinary api 
             url: result.secure_url,
         });
     }
 
     // now we need to show the image uploading on cloudinary in frontend so for that below condition is applied
 
-    req.body.images = imagesLink;
+    req.body.images = imagesLink; 
 
 
     req.body.user = req.user.id //it means that user in a body will be given as id for more details go in usermodel
@@ -50,6 +55,7 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
     res.status(201).json({
         success: true,
+        //success is taken in frontend through redux only when u need to send after submit to some page
         product
     }) //res.status in json format as stated in arguments is used in postman output on link click 
 });
@@ -68,6 +74,7 @@ exports.getAllProducts = catchAsyncErrors(async (req, res) => {
     // now we will find the product with its name as keyword now this product is from productmodel therefore below stated Product.find() is the value of name from product model because in apifeatures the name is written in if we write a keyword in search box and that keyword is finding from product models name 
 
     const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter().pagination(resultPerPage);
+    //in the above line search is a function and find is a method search is defined in api feature
 
     // here new keyword is used because it is a class component
 
@@ -105,7 +112,7 @@ exports.getAdminProducts = catchAsyncErrors(async (req, res) => {
 
 
 
-// now for getting a single product details by refering the product id 
+// now for getting a single product details by refering the product id (DONE)
 
 exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
 
@@ -135,7 +142,7 @@ exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
 });
 
 
-//update products 
+//update products (DONE)
 
 exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
 
@@ -149,22 +156,32 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
     }
 
         //here new keyword is given as u can see class component with inheretance require new keyword while using it  and here next is the callback function which calls the class or any function
+
+        // ===================== ONE IMAGE CONDITION ===================
     
     let images = [];
 
     if (typeof req.body.images === "string") {
             // it means the image has only one image as it is a string ecause lots of images have type of as array
         images.push(req.body.images);
+            //above images empty array has been made and here this empty array has been filled with req.body.images
             //by images push image upload on cloudinary
     } else {
         images = req.body.images;
     }
 
+        // ======= DELETING THE IMAGE FROM CLOUDINARY CONDITION ========
+
+    //now we will upload the image
+
     if(images !== undefined){
+        //here not equal to undefined means there is certain image 
         for (let i = 0; i < product.images.length; i++) {
             await cloudinary.v2.uploader.destroy(product.images[i].public_id);
                 //here images i means for every image index this loop will be carried out);
         }
+
+        // ========= UPLOAD THE IMAGE TO CLOUDINARY CONDITION ==========
 
         const imagesLink = [];
     for (let i = 0; i < images.length; i++) {
@@ -179,9 +196,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
             url: result.secure_url,
         });
     }
-
-    req.body.images = imagesLink;
-    
+    req.body.images = imagesLink;   
     }
     // and if product is found then
     product = await Product.findByIdAndUpdate(req.params.id, req.body, {

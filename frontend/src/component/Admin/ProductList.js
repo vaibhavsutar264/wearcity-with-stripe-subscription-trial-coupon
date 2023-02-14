@@ -98,7 +98,7 @@ const ProductList = ({ history }) => {
         return (
           <Fragment>
             <Link to={`/admin/product/${params.getValue(params.id, "id")}`}>
-              <EditIcon />
+              <EditIcon />  
             </Link>
 
             <Button
@@ -137,7 +137,6 @@ const ProductList = ({ history }) => {
         <SideBar />
         <div className="productListContainer">
           <h1 id="productListHeading">ALL PRODUCTS</h1>
-
           <DataGrid
             rows={rows}
             columns={columns}

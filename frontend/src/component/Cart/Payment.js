@@ -46,6 +46,8 @@ const Payment = ({ history }) => {
     totalPrice: orderInfo.totalPrice,
   };
 
+  // console.log(elements.getElement(CardNumberElement));
+
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -72,7 +74,7 @@ const Payment = ({ history }) => {
 
 
       // and if it is there then below process
-
+      console.log(elements.getElement(CardNumberElement));
       const result = await stripe.confirmCardPayment(client_secret, {
         payment_method: {
           card: elements.getElement(CardNumberElement),

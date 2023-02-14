@@ -22,12 +22,14 @@ export const newOrderReducer = (state = {}, action) => {
       return {
         loading: false,
         order: action.payload,
+        // order is just a name to be shown in redux terminal
       };
 
     case CREATE_ORDER_FAIL:
       return {
         loading: false,
         error: action.payload,
+        //error is just a name which 
       };
     case CLEAR_ERRORS:
       return {
@@ -52,6 +54,7 @@ export const myOrdersReducer = (state = { orders: [] }, action) => {
       return {
         loading: false,
         orders: action.payload,
+        //whatever is the initial state it will pass here with value here orders:[] and in above line it is orders: action.payload,
       };
 
     case MY_ORDERS_FAIL:
@@ -107,6 +110,7 @@ export const orderReducer = (state = { orders: [] }, action) => {
     case DELETE_ORDER_REQUEST:
       return {
         ...state,
+        //here ...state is state = { orders: [] } as initial value 
         loading: true,
       };
 
