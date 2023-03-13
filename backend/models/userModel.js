@@ -82,7 +82,6 @@ userSchema.methods.comparePassword = async function(enteredPassword){
     // bcrypt has a compare method for checking the password with entered password
     // here we have used bcrypt because the password which is saved in databases is in hash type so by using compare it will compare the actual password with the enteredpassword
     // by using this keyword u were saying thattake password from userschema only
-
 }
 
 //Generating password reset token which will be sent to nodemailer it is like a otp
