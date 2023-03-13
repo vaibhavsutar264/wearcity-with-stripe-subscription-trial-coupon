@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.451e1deb.css",
+    "main.js": "/static/js/main.0cb2d841.js",
+    "static/media/Profile.png": "/static/media/Profile.697fdcd21f6d157b9073.png",
+    "static/media/WearCityLogo2.png": "/static/media/WearCityLogo2.0f9661dc6621a84b5d8f.png",
+    "index.html": "/index.html",
+    "main.451e1deb.css.map": "/static/css/main.451e1deb.css.map",
+    "main.0cb2d841.js.map": "/static/js/main.0cb2d841.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.451e1deb.css",
+    "static/js/main.0cb2d841.js"
+  ]
+}
